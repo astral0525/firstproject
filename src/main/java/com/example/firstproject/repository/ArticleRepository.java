@@ -3,6 +3,8 @@ package com.example.firstproject.repository;
 import com.example.firstproject.entity.Article;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.ArrayList;
+
 //CrudRepository : 스프링 프레임워크에서 제공하는 인터페이스
 //기본적인 CRUD 작업을 수행하는 메서드를 정의
 //CrudRepository를 상속받으면 별도로 메서드를 선언하지 않아도
@@ -11,6 +13,6 @@ import org.springframework.data.repository.CrudRepository;
 //<엔터티 타입, 해당 엔터티의 기본 키 타입>
 public interface ArticleRepository extends CrudRepository<Article, Long> {
 
-
-
+    @Override
+    ArrayList<Article> findAll();
 }
