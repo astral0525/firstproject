@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -27,7 +26,6 @@ public class ArticleController {
     }
 
     @PostMapping("/articles/create")
-    @ResponseBody
     public String createArticle(ArticleForm form){
         log.info(form.toString());
 
@@ -38,7 +36,7 @@ public class ArticleController {
         //2. Repository에게 Entity를 DB안에 저장하게 함
         Article saved = articleRepository.save(article);
         log.info(saved.toString());
-        return "작성이완료되었습니다";
+        return "redirect:/articles/" + saved.getId();
     }
 
 
@@ -60,6 +58,7 @@ public class ArticleController {
     @GetMapping("/articles")
     public String index(Model model){
         //1.모든 Article을 가져온다!
+        //이 때 findAll()함수는 Iterable이 반환값이므로 List<Article>을 반환하도록 오버라이드 해준다.
         List<Article> articleEntityList = articleRepository.findAll();
 
         //2. 가져온 Article 묶음을 뷰로 전달
@@ -68,7 +67,6 @@ public class ArticleController {
         //3. 뷰 페이지를 설정!
         return "articles/index"; //articles/index.mustache
 
-        return "";
     }
 
 
