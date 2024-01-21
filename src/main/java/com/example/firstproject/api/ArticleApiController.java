@@ -62,5 +62,21 @@ public class ArticleApiController {
 
     }
 
+    //트랜잭션 -> 실패 -> 롤백
+    @PostMapping("/api/transaction-test")
+    public ResponseEntity<List<Article>> transactionTest(@RequestBody List<ArticleForm> dtos){
+        List<Article> createdList = articleService.createArticles(dtos);
+
+        return (createdList != null)?
+                ResponseEntity.status(HttpStatus.OK).body(createdList) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+
+    }
+
+
+
+
+
 
 }
