@@ -20,6 +20,7 @@ public class CommentService {
     @Autowired
     private ArticleRepository articleRepository;
 
+    //해당 article의 댓글목록 반환
     public List<CommentDto> comments(Long articleId) {
 //        //조회 : 댓글 목록
 //        List<Comment> comments = commentRepository.findByArticleId(articleId);
@@ -61,7 +62,7 @@ public class CommentService {
 
     @Transactional
     public CommentDto update(Long id, CommentDto dto) {
-        //댓글 조회 및 예외 발생
+        //댓글 조회 및 댓글조회 오류시 예외 발생
         Comment target = commentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("댓글 수정 실패! 대상 댓글이 없습니다"));
 
