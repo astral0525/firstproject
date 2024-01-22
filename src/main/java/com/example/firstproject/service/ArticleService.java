@@ -50,7 +50,7 @@ public class ArticleService {
             return null;
         }
 
-        //4. 업데이트 및 정상 응답(200)
+        //4. 업데이트 후 반환
         target.patch(article);
         Article updated = articleRepository.save(target); //변경된 코드(article->target)
         return updated;
@@ -87,7 +87,7 @@ public class ArticleService {
 
         //강제 예외 발생
         articleRepository.findById(-1L).orElseThrow(
-            () -> new IllegalArgumentException("결재실패!")
+            () -> new IllegalArgumentException("결제실패!")
         );
 
         //결과값 반환
